@@ -40,7 +40,12 @@ namespace Math_game
 
             var name = Console.ReadLine();
             var date = DateTime.UtcNow;
+            Menu(name, date);
 
+        }
+
+        private static void Menu(string name, DateTime date)
+        {
             Console.WriteLine("---------------------");
             Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
             Console.WriteLine($@"What game would you like to play today?
@@ -55,23 +60,28 @@ namespace Math_game
             var gameSelected = Console.ReadLine();
 
             //.Trim() is needed to remove whitespaces from before and after input.
-            if (gameSelected.Trim() == "a" || gameSelected.Trim() == "A") 
-            { AdditionGame("addition game start"); }
-            else if (gameSelected.Trim() == "s" || gameSelected.Trim().Trim() == "S")
-            { SubstractionGame("sub game start"); }
-            else if (gameSelected.Trim() == "m" || gameSelected.Trim() == "M")
-            { MultiplyGame("multi game start"); }
-            else if (gameSelected.Trim() == "D" || gameSelected.Trim() == "D")
-            { DivisionGame("division game start"); }
-            else if (gameSelected.Trim() == "q" || gameSelected.Trim() == "Q")
-            { Environment.Exit(1); }
-            else
-            { 
-                Console.WriteLine("invalid input, try again");
-                Console.ReadLine();
+            switch (gameSelected.Trim().ToLower())
+            {
+                case "a":
+                    AdditionGame("addition game start");
+                    break;
+                case "s":
+                    SubstractionGame("sub game start");
+                    break;
+                case "m":
+                    MultiplyGame("multi game start");
+                    break;
+                case "d":
+                    DivisionGame("division game start");
+                    break;
+                case "q":
+                    Environment.Exit(1);
+                    break;
+                default:
+                    Console.WriteLine("invalid input, try again");
+                    Console.ReadLine();
+                    break;
             }
-            
-
         }
 
         private static void DivisionGame(string message)
