@@ -47,7 +47,7 @@ namespace Math_game
             Choose:
              A - Addition
              S - Substraction
-             M- Multiplication
+             M - Multiplication
              D - Division
              Q - Quit the program");
             Console.WriteLine("---------------------");
@@ -56,13 +56,13 @@ namespace Math_game
 
             //.Trim() is needed to remove whitespaces from before and after input.
             if (gameSelected.Trim() == "a" || gameSelected.Trim() == "A") 
-            { Console.WriteLine("A selected");  }
+            { AdditionGame("addition game start"); }
             else if (gameSelected.Trim() == "s" || gameSelected.Trim().Trim() == "S")
-            { Console.WriteLine("S selected"); }
+            { SubstractionGame("sub game start"); }
             else if (gameSelected.Trim() == "m" || gameSelected.Trim() == "M")
-            { Console.WriteLine("M selected"); }
+            { MultiplyGame("multi game start"); }
             else if (gameSelected.Trim() == "D" || gameSelected.Trim() == "D")
-            { Console.WriteLine("D selected"); }
+            { DivisionGame("division game start"); }
             else if (gameSelected.Trim() == "q" || gameSelected.Trim() == "Q")
             { Environment.Exit(1); }
             else
@@ -72,6 +72,26 @@ namespace Math_game
             }
             
 
+        }
+
+        private static void DivisionGame(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void MultiplyGame(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void SubstractionGame(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void AdditionGame(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }
