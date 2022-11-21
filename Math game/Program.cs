@@ -108,7 +108,32 @@ namespace Math_game
 
         private static void AdditionGame(string message)
         {
-            throw new NotImplementedException();
+            var random = new Random(); //random integer
+            var score = 0;
+
+            int firstNumber;
+            int secondNumber;
+
+            for(int i = 0; i < 5; i++)
+            {
+                firstNumber = random.Next(1, 9);
+                secondNumber = random.Next(1, 9);
+                
+                Console.WriteLine($"{firstNumber} + {secondNumber}");
+                var result = Console.ReadLine();
+
+                if (int.Parse(result) == firstNumber + secondNumber) //result is a string, so it needs to be parsed back into an int.
+                {
+                    Console.WriteLine("correct answer!");
+                    score++;
+                }
+                else
+                {
+                    Console.WriteLine("wrong answer!");
+                }
+
+                if (i ==4) { Console.WriteLine($"Game over. Your final score is {score}"); }
+            }
         }
     }
 }
