@@ -36,16 +36,23 @@ namespace Math_game
             //Console.WriteLine(myParagraph);
             #endregion
 
-            Console.WriteLine("What is your name?");
-
-            var name = Console.ReadLine();
-            var date = DateTime.UtcNow;
-            Menu(name, date);
+            string name = GetName();
+            Menu(name);
 
         }
 
-        private static void Menu(string name, DateTime date)
+        private static string GetName()
         {
+            Console.WriteLine("What is your name?");
+
+            var name = Console.ReadLine();
+            return name;
+        }
+
+        private static void Menu(string name)
+        {
+            
+            var date = DateTime.UtcNow;
             Console.WriteLine("---------------------");
             Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
             Console.WriteLine($@"What game would you like to play today?
