@@ -4,7 +4,7 @@ namespace Math_game
 {
     class Program
     {
-        //TODO: Game crashes when numbers other than int are used.
+
         static void Main(string[] args)
         {
             #region initial_lesson
@@ -79,7 +79,7 @@ namespace Math_game
                         AdditionGame("addition game start");
                         break;
                     case "s":
-                        SubstractionGame("sub game start");
+                        SubtractionGame("sub game start");
                         break;
                     case "m":
                         MultiplyGame("multi game start");
@@ -166,7 +166,7 @@ namespace Math_game
             }
         }
 
-        private static void SubstractionGame(string message)
+        private static void SubtractionGame(string message)
         {
             var random = new Random(); //random integer
             var score = 0;
