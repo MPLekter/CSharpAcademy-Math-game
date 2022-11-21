@@ -51,7 +51,6 @@ namespace Math_game
 
         private static void Menu(string name)
         {
-            
             var date = DateTime.UtcNow;
             Console.WriteLine("---------------------");
             Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
@@ -60,6 +59,7 @@ namespace Math_game
 
             do
             {
+                Console.Clear();
                 Console.WriteLine($@"What game would you like to play today?
 
             Choose:
@@ -124,9 +124,11 @@ namespace Math_game
                 {
                     Console.WriteLine("incorrect");
                 }
-
+                if (i == numberOfChances - 1)
+                {
+                    ShowFinalScore(score);
+                }
             }
-            Console.WriteLine($"Total number of correct answers {score}. Congratulations!");
         }
 
 
@@ -157,7 +159,10 @@ namespace Math_game
                     Console.WriteLine("wrong answer!");
                 }
 
-                if (i == numberOfChances - 1) { Console.WriteLine($"Game over. Your final score is {score}"); }
+                if (i == numberOfChances - 1)
+                {
+                    ShowFinalScore(score);
+                }
             }
         }
 
@@ -188,7 +193,10 @@ namespace Math_game
                     Console.WriteLine("wrong answer!");
                 }
 
-                if (i == numberOfChances - 1) { Console.WriteLine($"Game over. Your final score is {score}"); }
+                if (i == numberOfChances - 1)
+                {
+                    ShowFinalScore(score);
+                }
             }
         }
 
@@ -219,7 +227,10 @@ namespace Math_game
                     Console.WriteLine("wrong answer!");
                 }
 
-                if (i == numberOfChances-1) { Console.WriteLine($"Game over. Your final score is {score}"); }
+                if (i == numberOfChances-1)
+                {
+                    ShowFinalScore(score);
+                }
             }
         }
 
@@ -241,6 +252,11 @@ namespace Math_game
             result[1] = secondNumber;
 
             return result;
+        }
+        private static void ShowFinalScore(int score)
+        {
+            Console.WriteLine($"Game over. Your final score is {score}. Press any key to continue");
+            Console.ReadLine();
         }
     }
 }
