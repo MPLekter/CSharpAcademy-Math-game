@@ -55,40 +55,50 @@ namespace Math_game
             var date = DateTime.UtcNow;
             Console.WriteLine("---------------------");
             Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
-            Console.WriteLine($@"What game would you like to play today?
+
+            bool isGameOn = true;
+
+            do
+            {
+                Console.WriteLine($@"What game would you like to play today?
+
             Choose:
              A - Addition
              S - Substraction
              M - Multiplication
              D - Division
              Q - Quit the program");
-            Console.WriteLine("---------------------");
+                Console.WriteLine("---------------------");
 
-            var gameSelected = Console.ReadLine();
+                var gameSelected = Console.ReadLine();
 
-            //.Trim() is needed to remove whitespaces from before and after input.
-            switch (gameSelected.Trim().ToLower())
-            {
-                case "a":
-                    AdditionGame("addition game start");
-                    break;
-                case "s":
-                    SubstractionGame("sub game start");
-                    break;
-                case "m":
-                    MultiplyGame("multi game start");
-                    break;
-                case "d":
-                    DivisionGame("division game start");
-                    break;
-                case "q":
-                    Environment.Exit(1);
-                    break;
-                default:
-                    Console.WriteLine("invalid input, try again");
-                    Console.ReadLine();
-                    break;
-            }
+                //.Trim() is needed to remove whitespaces from before and after input.
+                switch (gameSelected.Trim().ToLower())
+                {
+                    case "a":
+                        AdditionGame("addition game start");
+                        break;
+                    case "s":
+                        SubstractionGame("sub game start");
+                        break;
+                    case "m":
+                        MultiplyGame("multi game start");
+                        break;
+                    case "d":
+                        DivisionGame("division game start");
+                        break;
+                    case "q":
+                        isGameOn = false;
+                        Environment.Exit(1);
+                        break;
+                    default:
+                        Console.WriteLine("invalid input, try again");
+                        Console.ReadLine();
+                        break;
+                }
+
+            } 
+            while (isGameOn);
         }
 
         private static void DivisionGame(string message)
