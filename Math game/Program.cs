@@ -7,7 +7,7 @@ namespace Math_game
     {
         public static void Main(string[] args)
         {
-            List<string> games = GetNewList();
+            List<string> games = new List<string>();
             #region initial_lesson
             /* int index = 1;
              string name = "Pablo";
@@ -39,12 +39,6 @@ namespace Math_game
             string name = GetName();
             Menu(name);
 
-            static List<string> GetNewList()
-            {
-                var list = new List<string>();
-                return list;
-            }
-
             static string GetName()
             {
                 Console.WriteLine("What is your name?");
@@ -58,7 +52,8 @@ namespace Math_game
                 var date = DateTime.UtcNow;
                 Console.WriteLine("---------------------");
                 Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
-
+                Console.WriteLine("Press a key to continue");
+                Console.ReadLine();
                 bool isGameOn = true;
 
                 do
@@ -67,8 +62,9 @@ namespace Math_game
                     Console.WriteLine($@"What game would you like to play today?
 
             Choose:
+             V - View previously played games
              A - Addition
-             S - Substraction
+             S - Subtraction
              M - Multiplication
              D - Division
              Q - Quit the program");
@@ -79,6 +75,9 @@ namespace Math_game
                     //.Trim() is needed to remove whitespaces from before and after input.
                     switch (gameSelected.Trim().ToLower())
                     {
+                        case "v":
+                            GetGames();
+                            break;
                         case "a":
                             AdditionGame("addition game start");
                             break;
@@ -104,7 +103,19 @@ namespace Math_game
                 }
                 while (isGameOn);
             }
-
+            void GetGames()
+            {
+                Console.Clear();
+                Console.WriteLine("Games History");
+                Console.WriteLine("-------------");
+                foreach (var game in games)
+                { 
+                    Console.WriteLine(game); 
+                }
+                Console.WriteLine("-------------\n");
+                Console.WriteLine("Press any key to return to menu");
+                Console.ReadLine();
+            }
             void DivisionGame(string message)
             {
                 var numberOfChances = 5;
@@ -130,6 +141,7 @@ namespace Math_game
                     }
                     if (i == numberOfChances - 1)
                     {
+                        AddToHistory(games, score, "Division");
                         ShowFinalScore(score);
                     }
                 }
@@ -164,6 +176,7 @@ namespace Math_game
 
                     if (i == numberOfChances - 1)
                     {
+                        AddToHistory(games, score, "Multiply");
                         ShowFinalScore(score);
                     }
                 }
@@ -198,6 +211,7 @@ namespace Math_game
 
                     if (i == numberOfChances - 1)
                     {
+                        AddToHistory(games, score, "Subtraction");
                         ShowFinalScore(score);
                     }
                 }
@@ -232,11 +246,11 @@ namespace Math_game
 
                     if (i == numberOfChances - 1)
                     {
+                        AddToHistory(games, score, "Addition");
                         ShowFinalScore(score);
                     }
                 }
 
-                games.Add("");
             }
 
             static int[] GetDivisionNumbers()
@@ -264,6 +278,11 @@ namespace Math_game
                 Console.ReadLine();
             }
 
+        }
+
+        private static void AddToHistory(List<string> games, int score, string gameType)
+        {
+            games.Add($"{DateTime.Now} - {gameType}: Score={score}");
         }
     }
 }
