@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Math_game
 {
     class Program
     {
 
-        static void Main(string[] args)
+         void Main(string[] args)
         {
             #region initial_lesson
             /* int index = 1;
@@ -36,6 +37,7 @@ namespace Math_game
             //Console.WriteLine(myParagraph);
             #endregion
 
+            List<string> games = new List<string>();
             string name = GetName();
             Menu(name);
 
@@ -130,7 +132,6 @@ namespace Math_game
                 }
             }
         }
-
 
         private static void MultiplyGame(string message)
         {
@@ -232,6 +233,8 @@ namespace Math_game
                     ShowFinalScore(score);
                 }
             }
+
+            games.Add("");
         }
 
         private static int[] GetDivisionNumbers()
