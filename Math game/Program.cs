@@ -5,9 +5,9 @@ namespace Math_game
 {
     class Program
     {
-
-         void Main(string[] args)
+        public static void Main(string[] args)
         {
+            List<string> games = GetNewList();
             #region initial_lesson
             /* int index = 1;
              string name = "Pablo";
@@ -36,33 +36,35 @@ namespace Math_game
              */
             //Console.WriteLine(myParagraph);
             #endregion
-
-            List<string> games = new List<string>();
             string name = GetName();
             Menu(name);
 
-        }
-
-        private static string GetName()
-        {
-            Console.WriteLine("What is your name?");
-
-            var name = Console.ReadLine();
-            return name;
-        }
-
-        private static void Menu(string name)
-        {
-            var date = DateTime.UtcNow;
-            Console.WriteLine("---------------------");
-            Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
-
-            bool isGameOn = true;
-
-            do
+            static List<string> GetNewList()
             {
-                Console.Clear();
-                Console.WriteLine($@"What game would you like to play today?
+                var list = new List<string>();
+                return list;
+            }
+
+            static string GetName()
+            {
+                Console.WriteLine("What is your name?");
+
+                var name = Console.ReadLine();
+                return name;
+            }
+
+            void Menu(string name)
+            {
+                var date = DateTime.UtcNow;
+                Console.WriteLine("---------------------");
+                Console.WriteLine($"Hello {name.ToUpper()}. It's {date}. This is such a fun thing.\n");
+
+                bool isGameOn = true;
+
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine($@"What game would you like to play today?
 
             Choose:
              A - Addition
@@ -70,196 +72,198 @@ namespace Math_game
              M - Multiplication
              D - Division
              Q - Quit the program");
-                Console.WriteLine("---------------------");
+                    Console.WriteLine("---------------------");
 
-                var gameSelected = Console.ReadLine();
+                    var gameSelected = Console.ReadLine();
 
-                //.Trim() is needed to remove whitespaces from before and after input.
-                switch (gameSelected.Trim().ToLower())
-                {
-                    case "a":
-                        AdditionGame("addition game start");
-                        break;
-                    case "s":
-                        SubtractionGame("sub game start");
-                        break;
-                    case "m":
-                        MultiplyGame("multi game start");
-                        break;
-                    case "d":
-                        DivisionGame("division game start");
-                        break;
-                    case "q":
-                        isGameOn = false;
-                        Environment.Exit(1);
-                        break;
-                    default:
-                        Console.WriteLine("invalid input, try again");
-                        Console.ReadLine();
-                        break;
+                    //.Trim() is needed to remove whitespaces from before and after input.
+                    switch (gameSelected.Trim().ToLower())
+                    {
+                        case "a":
+                            AdditionGame("addition game start");
+                            break;
+                        case "s":
+                            SubtractionGame("sub game start");
+                            break;
+                        case "m":
+                            MultiplyGame("multi game start");
+                            break;
+                        case "d":
+                            DivisionGame("division game start");
+                            break;
+                        case "q":
+                            isGameOn = false;
+                            Environment.Exit(1);
+                            break;
+                        default:
+                            Console.WriteLine("invalid input, try again");
+                            Console.ReadLine();
+                            break;
+                    }
+
                 }
-
-            } 
-            while (isGameOn);
-        }
-
-        private static void DivisionGame(string message)
-        {
-            var numberOfChances = 5;
-            var score = 0;
-
-            for (int i = 0; i < numberOfChances; i++)
-            {
-                var divisionNumbers = GetDivisionNumbers();
-                var firstNumber = divisionNumbers[0];
-                var secondNumber = divisionNumbers[1];
-
-                Console.WriteLine($"{firstNumber} / {secondNumber}");
-                var result = Console.ReadLine();
-
-                if (int.Parse(result) == firstNumber / secondNumber)
-                {
-                    Console.WriteLine("correct");
-                    score++;
-                }
-                else
-                {
-                    Console.WriteLine("incorrect");
-                }
-                if (i == numberOfChances - 1)
-                {
-                    ShowFinalScore(score);
-                }
+                while (isGameOn);
             }
-        }
 
-        private static void MultiplyGame(string message)
-        {
-            var random = new Random(); //random integer
-            var score = 0;
-            var numberOfChances = 5;
-
-            int firstNumber;
-            int secondNumber;
-
-            for (int i = 0; i < numberOfChances; i++)
+            void DivisionGame(string message)
             {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                var numberOfChances = 5;
+                var score = 0;
 
-                Console.WriteLine($"{firstNumber} * {secondNumber}");
-                var result = Console.ReadLine();
-
-                if (int.Parse(result) == firstNumber * secondNumber) //result is a string, so it needs to be parsed back into an int.
+                for (int i = 0; i < numberOfChances; i++)
                 {
-                    Console.WriteLine("correct answer!");
-                    score++;
-                }
-                else
-                {
-                    Console.WriteLine("wrong answer!");
-                }
+                    var divisionNumbers = GetDivisionNumbers();
+                    var firstNumber = divisionNumbers[0];
+                    var secondNumber = divisionNumbers[1];
 
-                if (i == numberOfChances - 1)
-                {
-                    ShowFinalScore(score);
-                }
-            }
-        }
+                    Console.WriteLine($"{firstNumber} / {secondNumber}");
+                    var result = Console.ReadLine();
 
-        private static void SubtractionGame(string message)
-        {
-            var random = new Random(); //random integer
-            var score = 0;
-            var numberOfChances = 5;
-
-            int firstNumber;
-            int secondNumber;
-
-            for (int i = 0; i < numberOfChances; i++)
-            {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
-
-                Console.WriteLine($"{firstNumber} - {secondNumber}");
-                var result = Console.ReadLine();
-
-                if (int.Parse(result) == firstNumber - secondNumber) //result is a string, so it needs to be parsed back into an int.
-                {
-                    Console.WriteLine("correct answer!");
-                    score++;
-                }
-                else
-                {
-                    Console.WriteLine("wrong answer!");
-                }
-
-                if (i == numberOfChances - 1)
-                {
-                    ShowFinalScore(score);
-                }
-            }
-        }
-
-        private static void AdditionGame(string message)
-        {
-            var random = new Random(); //random integer
-            var score = 0;
-            var numberOfChances = 5;
-
-            int firstNumber;
-            int secondNumber;
-
-            for(int i = 0; i < numberOfChances; i++)
-            {
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
-                
-                Console.WriteLine($"{firstNumber} + {secondNumber}");
-                var result = Console.ReadLine();
-
-                if (int.Parse(result) == firstNumber + secondNumber) //result is a string, so it needs to be parsed back into an int.
-                {
-                    Console.WriteLine("correct answer!");
-                    score++;
-                }
-                else
-                {
-                    Console.WriteLine("wrong answer!");
-                }
-
-                if (i == numberOfChances-1)
-                {
-                    ShowFinalScore(score);
+                    if (int.Parse(result) == firstNumber / secondNumber)
+                    {
+                        Console.WriteLine("correct");
+                        score++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("incorrect");
+                    }
+                    if (i == numberOfChances - 1)
+                    {
+                        ShowFinalScore(score);
+                    }
                 }
             }
 
-            games.Add("");
-        }
-
-        private static int[] GetDivisionNumbers()
-        {
-            var random = new Random();
-            var firstNumber = random.Next(0, 99);
-            var secondNumber = random.Next(0, 99);
-
-            var result = new int[2];
-
-            while (firstNumber % secondNumber !=0) //% gives you a reminder of division. So: 4/4 = 4.0. -> false (good). 5/4 = 1.25 ->true (not what is intended). While true, regenerate numbers.
+            void MultiplyGame(string message)
             {
-                firstNumber = random.Next(1, 99);
-                secondNumber = random.Next(1, 99);
+                var random = new Random(); //random integer
+                var score = 0;
+                var numberOfChances = 5;
+
+                int firstNumber;
+                int secondNumber;
+
+                for (int i = 0; i < numberOfChances; i++)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+
+                    Console.WriteLine($"{firstNumber} * {secondNumber}");
+                    var result = Console.ReadLine();
+
+                    if (int.Parse(result) == firstNumber * secondNumber) //result is a string, so it needs to be parsed back into an int.
+                    {
+                        Console.WriteLine("correct answer!");
+                        score++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("wrong answer!");
+                    }
+
+                    if (i == numberOfChances - 1)
+                    {
+                        ShowFinalScore(score);
+                    }
+                }
             }
 
-            result[0] = firstNumber;
-            result[1] = secondNumber;
+            void SubtractionGame(string message)
+            {
+                var random = new Random(); //random integer
+                var score = 0;
+                var numberOfChances = 5;
 
-            return result;
-        }
-        private static void ShowFinalScore(int score)
-        {
-            Console.WriteLine($"Game over. Your final score is {score}. Press any key to continue");
-            Console.ReadLine();
+                int firstNumber;
+                int secondNumber;
+
+                for (int i = 0; i < numberOfChances; i++)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+
+                    Console.WriteLine($"{firstNumber} - {secondNumber}");
+                    var result = Console.ReadLine();
+
+                    if (int.Parse(result) == firstNumber - secondNumber) //result is a string, so it needs to be parsed back into an int.
+                    {
+                        Console.WriteLine("correct answer!");
+                        score++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("wrong answer!");
+                    }
+
+                    if (i == numberOfChances - 1)
+                    {
+                        ShowFinalScore(score);
+                    }
+                }
+            }
+
+            void AdditionGame(string message)
+            {
+                var random = new Random(); //random integer
+                var score = 0;
+                var numberOfChances = 5;
+
+                int firstNumber;
+                int secondNumber;
+
+                for (int i = 0; i < numberOfChances; i++)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+
+                    Console.WriteLine($"{firstNumber} + {secondNumber}");
+                    var result = Console.ReadLine();
+
+                    if (int.Parse(result) == firstNumber + secondNumber) //result is a string, so it needs to be parsed back into an int.
+                    {
+                        Console.WriteLine("correct answer!");
+                        score++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("wrong answer!");
+                    }
+
+                    if (i == numberOfChances - 1)
+                    {
+                        ShowFinalScore(score);
+                    }
+                }
+
+                games.Add("");
+            }
+
+            static int[] GetDivisionNumbers()
+            {
+                var random = new Random();
+                var firstNumber = random.Next(0, 99);
+                var secondNumber = random.Next(0, 99);
+
+                var result = new int[2];
+
+                while (firstNumber % secondNumber != 0) //% gives you a reminder of division. So: 4/4 = 4.0. -> false (good). 5/4 = 1.25 ->true (not what is intended). While true, regenerate numbers.
+                {
+                    firstNumber = random.Next(1, 99);
+                    secondNumber = random.Next(1, 99);
+                }
+
+                result[0] = firstNumber;
+                result[1] = secondNumber;
+
+                return result;
+            }
+            static void ShowFinalScore(int score)
+            {
+                Console.WriteLine($"Game over. Your final score is {score}. Press any key to continue");
+                Console.ReadLine();
+            }
+
         }
     }
 }
