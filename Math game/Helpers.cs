@@ -21,6 +21,18 @@ namespace Math_game
             Console.WriteLine("Press any key to return to menu");
             Console.ReadLine();
         }
+
+        internal static string ValidateResult(string result)
+        {
+            //validate if the answer is not null or empty. Also validate if you can parse it into an int.
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _)) //out _ means we don't expect a result.
+            {
+                Console.WriteLine("Your answer needs to be an integer (number)");
+                result = Console.ReadLine();
+            }
+            return result;
+        }
+
         internal static int[] GetDivisionNumbers()
         {
             var random = new Random();
@@ -55,6 +67,21 @@ namespace Math_game
                 Score = score,
                 Type = gameType
             });
+        }
+
+        internal static string GetName()
+        {
+            Console.WriteLine("What is your name?");
+
+            var name = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(name) || Int32.TryParse(name, out _)) //out _ means we don't expect a result.
+            {
+                Console.WriteLine("Your name cannot be empty or an integer (number)");
+                name = Console.ReadLine();
+            }
+
+            return name;
         }
     }
 }

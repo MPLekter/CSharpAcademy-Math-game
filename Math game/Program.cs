@@ -37,20 +37,14 @@ namespace Math_game
             #endregion
 
             #region variables
-            string name = GetName();
+            string name;
             var date = DateTime.UtcNow;
             var menu = new Menu();
             #endregion
 
+            name = Helpers.GetName();
             menu.ShowMenu(name, date);
 
-            static string GetName() 
-            {
-                Console.WriteLine("What is your name?");
-
-                var name = Console.ReadLine();
-                return name;
-            }
         }
 
     }

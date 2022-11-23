@@ -19,6 +19,8 @@ namespace Math_game
                 Console.WriteLine($"{firstNumber} / {secondNumber}");
                 var result = Console.ReadLine();
 
+                result = Helpers.ValidateResult(result);
+
                 if (int.Parse(result) == firstNumber / secondNumber)
                 {
                     Console.WriteLine("correct");
@@ -52,6 +54,7 @@ namespace Math_game
 
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber * secondNumber) //result is a string, so it needs to be parsed back into an int.
                 {
@@ -87,6 +90,7 @@ namespace Math_game
 
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber - secondNumber) //result is a string, so it needs to be parsed back into an int.
                 {
@@ -122,6 +126,7 @@ namespace Math_game
 
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
                 var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
                 if (int.Parse(result) == firstNumber + secondNumber) //result is a string, so it needs to be parsed back into an int.
                 {
