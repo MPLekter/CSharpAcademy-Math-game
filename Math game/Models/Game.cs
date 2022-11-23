@@ -9,7 +9,17 @@ namespace Math_game.Models
         #region properties
         public int Score { get; set; }
         public DateTime Date { get; set; }
-        public string Type { get; set; }
+        public GameType Type { get; set; }
         #endregion
     }
+
+    internal enum GameType
+    {
+        Addition,
+        Subtraction,
+        Multiplication,
+        Division
+    }
+           
+
 }

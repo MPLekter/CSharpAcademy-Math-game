@@ -46,7 +46,7 @@ namespace Math_game
             Console.ReadLine();
         }
 
-        internal static void AddToHistory(int score, string gameType)
+        internal static void AddToHistory(int score, GameType gameType)
         {
             //games.Add($"{DateTime.Now} - {gameType}: Score={score}"); //old code when games was a list of strings
             games.Add(new Game 

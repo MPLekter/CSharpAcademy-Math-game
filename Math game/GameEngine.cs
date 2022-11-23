@@ -1,4 +1,5 @@
 ﻿using System;
+using Math_game.Models;
 
 namespace Math_game
 {
@@ -29,7 +30,7 @@ namespace Math_game
                 }
                 if (i == numberOfChances - 1)
                 {
-                    Helpers.AddToHistory(score, "Division");
+                    Helpers.AddToHistory(score, GameType.Division);
                     Helpers.ShowFinalScore(score);
                 }
             }
@@ -64,7 +65,7 @@ namespace Math_game
 
                 if (i == numberOfChances - 1)
                 {
-                    Helpers.AddToHistory(score, "Multiply");
+                    Helpers.AddToHistory(score, GameType.Multiplication);
                     Helpers.ShowFinalScore(score);
                 }
             }
@@ -99,7 +100,7 @@ namespace Math_game
 
                 if (i == numberOfChances - 1)
                 {   
-                    Helpers.AddToHistory(score, "Subtraction");
+                    Helpers.AddToHistory(score, GameType.Subtraction);
                     Helpers.ShowFinalScore(score);
                 }
             }
@@ -134,7 +135,7 @@ namespace Math_game
 
                 if (i == numberOfChances - 1)
                 {   
-                    Helpers.AddToHistory(score, "Addition");
+                    Helpers.AddToHistory(score, GameType.Addition);
                     Helpers.ShowFinalScore(score);
                 }
             }
