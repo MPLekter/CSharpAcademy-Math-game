@@ -36,7 +36,7 @@ namespace Math_game
                 switch (gameSelected.Trim().ToLower())
                 {
                     case "v":
-                        Helpers.GetGames();
+                        Helpers.PrintGames();
                         break;
                     case "a":
                         engine.AdditionGame("addition game start");
