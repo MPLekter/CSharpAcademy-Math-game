@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Math_game.Models;
 
 namespace Math_game
@@ -20,6 +21,39 @@ namespace Math_game
             Console.WriteLine("-------------\n");
             Console.WriteLine("Press any key to return to menu");
             Console.ReadLine();
+        }
+
+        internal static void SaveGames() //TODO: work on this method to be able to choose file dest and fix content!
+        {
+            Console.Clear();
+            Console.WriteLine("Saving Games...");
+            Console.WriteLine("-------------");
+            //TODO: ask where to save
+            //TODO: fix bug with content
+            string[] gamesAsStringArray = new string[games.Count];
+            int size = 0;
+            foreach (var game in games)
+            {
+                gamesAsStringArray[size++] = $"{game.Date} {game.Type} Score = {game.Score}"; //this means we start at gASA[0] and immediately go to gASA[1], but use it only if needed.
+            }
+            File.WriteAllLines("CSHARPGAME.txt", gamesAsStringArray);
+
+        }
+
+        internal static void LoadGames() //TODO: work on the retrieved string to be able to save the type correctly
+        {
+            Console.Clear();
+            Console.WriteLine("Loading Games...");
+            Console.WriteLine("-------------");
+
+            string load = File.ReadAllText("CSHARPGAME.txt");
+
+            games.Add(new Game
+                {
+                    Date = DateTime.Now,
+                    Score = 1,
+                    Type = GameType.LoadedType
+                });
         }
 
         internal static string ValidateResult(string result)

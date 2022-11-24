@@ -18,7 +18,8 @@ namespace Math_game.Models
         Addition,
         Subtraction,
         Multiplication,
-        Division
+        Division,
+        LoadedType
     }
            
 

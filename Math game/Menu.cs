@@ -22,6 +22,8 @@ namespace Math_game
                 Console.WriteLine($@"What game would you like to play today?
 
             Choose:
+             X - Save previously played games list into a file
+             C - Load previously played games list from a file
              V - View previously played games
              A - Addition
              S - Subtraction
@@ -35,6 +37,12 @@ namespace Math_game
                 //.Trim() is needed to remove whitespaces from before and after input.
                 switch (gameSelected.Trim().ToLower())
                 {
+                    case "x":
+                        Helpers.SaveGames();
+                        break;
+                    case "c":
+                        Helpers.LoadGames();
+                        break;
                     case "v":
                         Helpers.PrintGames();
                         break;
