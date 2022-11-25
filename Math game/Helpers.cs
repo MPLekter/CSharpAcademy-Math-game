@@ -48,12 +48,41 @@ namespace Math_game
 
             string load = File.ReadAllText("CSHARPGAME.txt");
 
+            # region Retrieving data from save file
+            //Method 1: cut the string based on conditions
+
+            //DateTime.now is 19 characters long, so cut a substring
+            string retrievedDate = load.Substring(0, 19);
+
+            //GameType is between DateTime and "Score"
+            string cutOne = load.Replace(retrievedDate, "").Trim();
+            string retrievedGameType = cutOne.Substring(0, cutOne.IndexOf("Score")).Trim();
+
+            //Score is located 2 characters after "="
+            string retrievedScore = load.Substring(load.IndexOf("=") + 2);
+
+            Console.WriteLine(retrievedDate);
+            Console.WriteLine(retrievedGameType);
+            Console.WriteLine(retrievedScore);
+            
+            
+            
+            Console.ReadLine();
+            #endregion
+
+            /*debug
+            DateTime Date = DateTime.Parse(retrievedDate);
+            GameType Type = Enum.Parse<GameType>(retrievedScore);
+            int Score = int.Parse(retrievedScore);
+            */
+
             games.Add(new Game
                 {
-                    Date = DateTime.Now,
-                    Score = 1,
-                    Type = GameType.LoadedType
+                    Date = DateTime.Parse(retrievedDate),
+                    Score = int.Parse(retrievedScore),
+                    Type = Enum.Parse<Models.GameType>(retrievedGameType)
                 });
+            
         }
 
         internal static string ValidateResult(string result)

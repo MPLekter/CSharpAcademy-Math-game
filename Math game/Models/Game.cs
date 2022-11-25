@@ -19,7 +19,7 @@ namespace Math_game.Models
         Subtraction,
         Multiplication,
         Division,
-        LoadedType
+        DEBUGTYPE
     }
            
 
