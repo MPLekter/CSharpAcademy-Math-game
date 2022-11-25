@@ -46,11 +46,12 @@ namespace Math_game
             Console.WriteLine("Loading Games...");
             Console.WriteLine("-------------");
 
-            string load = File.ReadAllText("CSHARPGAME.txt");
+            string saveData = File.ReadAllText("CSHARPGAME.txt");
 
-            # region Retrieving data from save file
+            #region Retrieving data from save file
+            #region Method 1
             //Method 1: cut the string based on conditions
-
+            /*
             //DateTime.now is 19 characters long, so cut a substring
             string retrievedDate = load.Substring(0, 19);
 
@@ -59,8 +60,16 @@ namespace Math_game
             string retrievedGameType = cutOne.Substring(0, cutOne.IndexOf("Score")).Trim();
 
             //Score is located 2 characters after "="
-            string retrievedScore = load.Substring(load.IndexOf("=") + 2);
+            string retrievedScore = load.Substring(load.IndexOf("=") + 2); //TODO: FIX IT, it will not stop at for example 0, but will return 0 AND THE REST OF TEXT , E.G. ALL OTHER SAVES!
+            */
+            #endregion
+            #region Method 2
+            //Method 2: use Split and SubstringExtensions class to cut the strings and not think too much about numerical conditions
+            string retrievedDate = saveData.Split(" ")[0] + " " + saveData.Split(" ")[1];
+            string retrievedScore = SubstringExtensions.After(saveData, "=").Trim();
+            string retrievedGameType = saveData.Split(" ")[2];
 
+            #endregion
             Console.WriteLine(retrievedDate);
             Console.WriteLine(retrievedGameType);
             Console.WriteLine(retrievedScore);
@@ -76,12 +85,14 @@ namespace Math_game
             int Score = int.Parse(retrievedScore);
             */
 
+            //load to temp memory
             games.Add(new Game
                 {
                     Date = DateTime.Parse(retrievedDate),
                     Score = int.Parse(retrievedScore),
                     Type = Enum.Parse<Models.GameType>(retrievedGameType)
                 });
+            
             
         }
 
