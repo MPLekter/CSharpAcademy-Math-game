@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Math_game.Models;
+using Newtonsoft.Json;
 
 namespace Math_game
 {
@@ -41,6 +42,7 @@ namespace Math_game
             */
             #endregion
             #region Method 2: games -> dict -> streamwriter
+            /*
             //TODO: DEBUG IT
             int index = 0;
             var gamesAsDictionary = new Dictionary<string, Dictionary<string, string>>();
@@ -71,6 +73,27 @@ namespace Math_game
             }
 
             Console.ReadLine();
+            */
+            #endregion
+            #region Method 3: Json file
+            int index = 0;
+            var gamesAsDictionary = new Dictionary<string, Dictionary<string, string>>();
+
+            foreach (var game in games)
+            {
+                Dictionary<string, string> gameDetails = new Dictionary<string, string>()
+                {
+                    {"Date", game.Date.ToString()},
+                    {"Type", game.Type.ToString()},
+                    {"Score", game.Score.ToString()}
+                };
+
+                gamesAsDictionary.Add(index.ToString(), gameDetails);
+                index++;
+            }
+
+            string json = JsonConvert.SerializeObject(gamesAsDictionary, Formatting.Indented);
+            File.AppendAllText("CSHARPGAME_saves.txt", json);
             #endregion
 
         }
