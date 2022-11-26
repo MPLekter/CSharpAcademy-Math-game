@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Math_game
+namespace Math_game //your namespace
 {
     static class SubstringExtensions
     {

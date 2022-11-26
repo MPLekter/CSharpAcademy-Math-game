@@ -28,8 +28,9 @@ namespace Math_game
             Console.Clear();
             Console.WriteLine("Saving Games...");
             Console.WriteLine("-------------");
+            #region Method 1: games -> string array -> text file
+            /*
             //TODO: ask where to save
-            //TODO: fix bug with content
             string[] gamesAsStringArray = new string[games.Count];
             int size = 0;
             foreach (var game in games)
@@ -37,6 +38,40 @@ namespace Math_game
                 gamesAsStringArray[size++] = $"{game.Date} {game.Type} Score = {game.Score}"; //this means we start at gASA[0] and immediately go to gASA[1], but use it only if needed.
             }
             File.WriteAllLines("CSHARPGAME.txt", gamesAsStringArray);
+            */
+            #endregion
+            #region Method 2: games -> dict -> streamwriter
+            //TODO: DEBUG IT
+            int index = 0;
+            var gamesAsDictionary = new Dictionary<string, Dictionary<string, string>>();
+
+            foreach (var game in games)
+            {
+                Dictionary<string, string> gameDetails = new Dictionary<string, string>()
+                {
+                    {"Date", game.Date.ToString()},
+                    {"Type", game.Type.ToString()},
+                    {"Score", game.Score.ToString()}
+                };
+
+                gamesAsDictionary.Add(index.ToString(), gameDetails);
+                index++;
+            }
+
+            foreach (KeyValuePair<string, Dictionary<string, string>> kvp in gamesAsDictionary)
+            {
+                string nestedKey;
+                string nestedValue;
+                foreach (KeyValuePair<string, string> nestedKvp in kvp.Value)
+                {
+                    nestedKey = nestedKvp.Key;
+                    nestedValue = nestedKvp.Value;
+                    File.AppendAllText("CSHARPGAME_saves.txt", $"save {kvp.Key}_contents_{nestedKey} , {nestedValue}"); //TODO: refactor a bit to print correctly, but generally works.
+                }
+            }
+
+            Console.ReadLine();
+            #endregion
 
         }
 
