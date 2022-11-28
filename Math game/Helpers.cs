@@ -24,7 +24,7 @@ namespace Math_game
             Console.ReadLine();
         }
 
-        internal static void SaveGames() //TODO: work on this method to be able to choose file dest and fix content!
+        internal static void SaveGames() //TODO: make it save more than one in desired format.
         {
             Console.Clear();
             Console.WriteLine("Saving Games...");
@@ -98,15 +98,40 @@ namespace Math_game
 
         }
 
-        internal static void LoadGames() //TODO: work on the retrieved string to be able to save the type correctly
+        internal static void LoadGames() 
         {
             Console.Clear();
             Console.WriteLine("Loading Games...");
             Console.WriteLine("-------------");
 
-            string saveData = File.ReadAllText("CSHARPGAME.txt");
+            #region Retrieving data from JSON save file
+            string saveDataJson = File.ReadAllText("CSHARPGAME_saves.txt");
 
-            #region Retrieving data from save file
+            var gamesAsDictionary = new Dictionary<string, Dictionary<string, string>>();
+            gamesAsDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(saveDataJson);
+
+            foreach (string index in gamesAsDictionary.Keys)
+            {
+                var retrievedDate = gamesAsDictionary[index]["Date"];
+                var retrievedScore = gamesAsDictionary[index]["Score"];
+                var retrievedGameType = gamesAsDictionary[index]["Type"];
+                //load to temp memory
+
+                games.Add(new Game
+                    {
+                        Date = DateTime.Parse(retrievedDate),
+                        Score = int.Parse(retrievedScore),
+                        Type = Enum.Parse<Models.GameType>(retrievedGameType)
+                    });
+            }
+
+
+
+            Console.ReadLine();
+            #endregion
+            #region Retrieving data from TEXT save file
+            //string saveDataTxt = File.ReadAllText("CSHARPGAME.txt");
+
             #region Method 1
             //Method 1: cut the string based on conditions
             /*
@@ -122,10 +147,11 @@ namespace Math_game
             */
             #endregion
             #region Method 2
+            /*
             //Method 2: use Split and SubstringExtensions class to cut the strings and not think too much about numerical conditions
-            string retrievedDate = saveData.Split(" ")[0] + " " + saveData.Split(" ")[1];
-            string retrievedScore = SubstringExtensions.After(saveData, "=").Trim();
-            string retrievedGameType = saveData.Split(" ")[2];
+            string retrievedDate = saveDataTxt.Split(" ")[0] + " " + saveDataTxt.Split(" ")[1];
+            string retrievedScore = SubstringExtensions.After(saveDataTxt, "=").Trim();
+            string retrievedGameType = saveDataTxt.Split(" ")[2];
 
             #endregion
             Console.WriteLine(retrievedDate);
@@ -135,21 +161,25 @@ namespace Math_game
             
             
             Console.ReadLine();
+            */
             #endregion
 
             /*debug
             DateTime Date = DateTime.Parse(retrievedDate);
-            GameType Type = Enum.Parse<GameType>(retrievedScore);
+            GameType Type = Enum.Parse<GameType>(retrievedGameType);
             int Score = int.Parse(retrievedScore);
             */
-
             //load to temp memory
+            /*
             games.Add(new Game
-                {
-                    Date = DateTime.Parse(retrievedDate),
-                    Score = int.Parse(retrievedScore),
-                    Type = Enum.Parse<Models.GameType>(retrievedGameType)
-                });
+            {
+                Date = DateTime.Parse(retrievedDate),
+                Score = int.Parse(retrievedScore),
+                Type = Enum.Parse<Models.GameType>(retrievedGameType)
+            });
+            */
+            #endregion
+
             
             
         }
