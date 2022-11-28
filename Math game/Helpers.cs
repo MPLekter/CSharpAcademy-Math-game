@@ -98,7 +98,7 @@ namespace Math_game
             #endregion
 
         }
-
+        
         internal static void LoadGames() 
         {
             Console.Clear();
