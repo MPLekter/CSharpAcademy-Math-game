@@ -93,6 +93,7 @@ namespace Math_game
             }
 
             string json = JsonConvert.SerializeObject(gamesAsDictionary, Formatting.Indented);
+            File.Delete("CSHARPGAME_saves.txt");
             File.AppendAllText("CSHARPGAME_saves.txt", json);
             #endregion
 
